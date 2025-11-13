@@ -218,7 +218,7 @@ Content-Type: application/json`
 
 ## ⚙️ Struktur Folder
 
-`pgsql ├── controller/
+├── controller/
 ├── middleware/
 ├── models/
 ├── repository/
