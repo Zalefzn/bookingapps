@@ -4,358 +4,246 @@
 API ini dikembangkan menggunakan **Express.js** dan **Sequelize ORM** untuk sistem pemesanan lapangan olahraga.  
 Mendukung autentikasi **JWT** dan menyediakan endpoint CRUD untuk **Users**, **Fields**, dan **Bookings**.
 
----
+----------
 
 ## 🚀 Cara Menjalankan Project
 
-1️⃣ Clone repository  
-git clone https://github.com/Zalefzn/bookingapps.git
-cd bookingapps
+1️⃣ **Clone repository**
 
-2️⃣ Install dependencies
-npm install
+`git clone https://github.com/Zalefzn/bookingapps.git cd bookingapps` 
 
-3️⃣ Jalankan server
-node index.js
-Server berjalan di: http://localhost:3008
+2️⃣ **Install dependencies**
 
-```bash
+`npm install` 
 
-🔄 Alur API
+3️⃣ **Jalankan server**
 
-🧍‍♂️ 1. Autentikasi User
-📌 REGISTER USER
+`node index.js` 
 
-Method: POST
-Endpoint: /api/register
-Request:
-json
-{
-  "name": "Rizal Fauzan",
-  "email": "rizal@example.com",
-  "password": "123456"
-}
+Server berjalan di: `http://localhost:3008`
 
-Response:
-json
-{
-  "status": 201,
-  "message": "User registered successfully",
-  "data": {
-    "id": 2,
-    "name": "Rizal Fauzan",
-    "email": "rizal@example.com",
-    "role": "user"
-  }
-}
+----------
 
-📌 LOGIN USER
-Method: POST
-Endpoint: /api/login
-Request:
-json
-{
-  "email": "rizal@example.com",
-  "password": "123456"
-}
+## 🔄 Alur API
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Login successful",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-    "user": {
-      "id": 2,
-      "name": "Rizal Fauzan",
-      "email": "rizal@example.com",
-      "role": "user"
-    }
-  }
-}
+### 🧍‍♂️ 1. Autentikasi User
 
-📌 GET PROFILE
-Method: GET
-Endpoint: /api/profile
-Gunakan token dari login
+#### 📌 Register User
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+-   **Method:** POST
+    
+-   **Endpoint:** `/api/register`
+    
+-   **Request Body:**
+    
 
-Response:
-json
-{
-  "status": 200,
-  "message": "User profile retrieved successfully",
-  "data": {
-    "id": 2,
-    "name": "Rizal Fauzan",
-    "email": "rizal@example.com",
-    "role": "user"
-  }
-}
+`{  "name":  "Rizal Fauzan",  "email":  "rizal@example.com",  "password":  "123456"  }` 
 
-🏟️ 2. Field API
-📌 GET ALL FIELDS
-Method: GET
-Endpoint: /api/fields
+-   **Response:**
+    
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+`{  "status":  201,  "message":  "User registered successfully",  "data":  {  "id":  2,  "name":  "Rizal Fauzan",  "email":  "rizal@example.com",  "role":  "user"  }  }` 
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Fields retrieved successfully",
-  "data": [
-    {
-      "id": 1,
-      "name": "Lapangan Basket A",
-      "type": "Basket",
-      "price_per_hour": "150000.00"
-    },
-    {
-      "id": 2,
-      "name": "Lapangan Futsal A",
-      "type": "Futsal",
-      "price_per_hour": "150000.00"
-    }
-  ]
-}
+#### 📌 Login User
 
-📌 GET SINGLE FIELD
-Method: GET
-Endpoint: /api/fields/:id
+-   **Method:** POST
+    
+-   **Endpoint:** `/api/login`
+    
+-   **Request Body:**
+    
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+`{  "email":  "rizal@example.com",  "password":  "123456"  }` 
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Field retrieved successfully",
-  "data": {
-    "id": 1,
-    "name": "Lapangan Basket A",
-    "type": "Basket",
-    "price_per_hour": "150000.00"
-  }
-}
+-   **Response:**
+    
 
-📌 CREATE FIELD
-Method: POST
-Endpoint: /api/fields
+`{  "status":  200,  "message":  "Login successful",  "data":  {  "token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",  "user":  {  "id":  2,  "name":  "Rizal Fauzan",  "email":  "rizal@example.com",  "role":  "user"  }  }  }` 
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+#### 📌 Get Profile
 
-Request:
-json
-{
-  "name": "Lapangan Futsal A",
-  "type": "Futsal",
-  "price_per_hour": 150000
-}
+-   **Method:** GET
+    
+-   **Endpoint:** `/api/profile`
+    
+-   **Headers:**
+    
 
-Response:
-json
-{
-  "status": 201,
-  "message": "Field created successfully",
-  "data": {
-    "id": 3,
-    "name": "Lapangan Futsal A",
-    "type": "Futsal",
-    "price_per_hour": "150000.00"
-  }
-}
+`Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json` 
 
-📌 UPDATE FIELD
-Method: PUT
-Endpoint: /api/fields/:id
+-   **Response:**
+    
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+`{  "status":  200,  "message":  "User profile retrieved successfully",  "data":  {  "id":  2,  "name":  "Rizal Fauzan",  "email":  "rizal@example.com",  "role":  "user"  }  }` 
 
-Request:
-json
-{
-  "name": "Lapangan Basket B",
-  "type": "Basket",
-  "price_per_hour": 200000
-}
+----------
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Field updated successfully",
-  "data": {
-    "id": 1,
-    "name": "Lapangan Basket B",
-    "type": "Basket",
-    "price_per_hour": "200000.00"
-  }
-}
+### 🏟️ 2. Field API
 
-📌 DELETE FIELD
-Method: DELETE
-Endpoint: /api/fields/:id
+#### 📌 Get All Fields
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+-   **Method:** GET
+    
+-   **Endpoint:** `/api/fields`
+    
+-   **Headers:**
+    
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Field deleted successfully"
-}
+`Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json` 
 
-📅 3. Booking API
-📌 GET ALL BOOKINGS
-Method: GET
-Endpoint: /api/bookings
+-   **Response:**
+    
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+`{  "status":  200,  "message":  "Fields retrieved successfully",  "data":  [  {  "id":  1,  "name":  "Lapangan Basket A",  "type":  "Basket",  "price_per_hour":  "150000.00"  },  {  "id":  2,  "name":  "Lapangan Futsal A",  "type":  "Futsal",  "price_per_hour":  "150000.00"  }  ]  }` 
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Bookings retrieved successfully",
-  "data": [
-    {
-      "id": 1,
-      "user_id": 1,
-      "field_id": 2,
-      "booking_date": "2025-11-11",
-      "start_time": "09:00:00",
-      "end_time": "11:00:00",
-      "status": "pending",
-      "user": {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john@example.com"
-      },
-      "field": {
-        "id": 2,
-        "name": "Lapangan Futsal A",
-        "type": "Futsal",
-        "price_per_hour": "150000.00"
-      }
-    }
-  ]
-}
+#### 📌 Get Single Field
 
-📌 CREATE BOOKING
-Method: POST
-Endpoint: /api/bookings
+-   **Method:** GET
+    
+-   **Endpoint:** `/api/fields/:id`
+    
+-   **Headers:** Sama seperti di atas
+    
+-   **Response:**
+    
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+`{  "status":  200,  "message":  "Field retrieved successfully",  "data":  {  "id":  1,  "name":  "Lapangan Basket A",  "type":  "Basket",  "price_per_hour":  "150000.00"  }  }` 
 
-Request:
-json
-{
-  "user_id": 2,
-  "field_id": 1,
-  "booking_date": "2025-11-11",
-  "start_time": "13:00",
-  "end_time": "15:00"
-}
+#### 📌 Create Field
 
-Response:
-json
-{
-  "status": 201,
-  "message": "Booking created successfully",
-  "data": {
-    "id": 4,
-    "user_id": 2,
-    "field_id": 1,
-    "booking_date": "2025-11-11",
-    "start_time": "13:00",
-    "end_time": "15:00",
-    "status": "pending"
-  }
-}
+-   **Method:** POST
+    
+-   **Endpoint:** `/api/fields`
+    
+-   **Request Body:**
+    
 
-📌 UPDATE BOOKING
-Method: PUT
-Endpoint: /api/bookings/:id
+`{  "name":  "Lapangan Futsal A",  "type":  "Futsal",  "price_per_hour":  150000  }` 
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+-   **Response:**
+    
 
-Request:
-json
-{
-  "booking_date": "2025-11-12",
-  "start_time": "10:00",
-  "end_time": "12:00",
-  "status": "confirmed"
-}
+`{  "status":  201,  "message":  "Field created successfully",  "data":  {  "id":  3,  "name":  "Lapangan Futsal A",  "type":  "Futsal",  "price_per_hour":  "150000.00"  }  }` 
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Booking updated successfully",
-  "data": {
-    "id": 4,
-    "booking_date": "2025-11-12",
-    "start_time": "10:00",
-    "end_time": "12:00",
-    "status": "confirmed"
-  }
-}
+#### 📌 Update Field
 
-📌 DELETE BOOKING
-Method: DELETE
-Endpoint: /api/bookings/:id
+-   **Method:** PUT
+    
+-   **Endpoint:** `/api/fields/:id`
+    
+-   **Request Body:**
+    
 
-headers:
-Authorization: Bearer <JWT_TOKEN>
-Content-Type: application/json
+`{  "name":  "Lapangan Basket B",  "type":  "Basket",  "price_per_hour":  200000  }` 
 
-Response:
-json
-{
-  "status": 200,
-  "message": "Booking deleted successfully"
-}
+-   **Response:**
+    
 
-⚙️ Struktur Folder
-pgsql
-├── controller/
+`{  "status":  200,  "message":  "Field updated successfully",  "data":  {  "id":  1,  "name":  "Lapangan Basket B",  "type":  "Basket",  "price_per_hour":  "200000.00"  }  }` 
+
+#### 📌 Delete Field
+
+-   **Method:** DELETE
+    
+-   **Endpoint:** `/api/fields/:id`
+    
+-   **Response:**
+    
+
+`{  "status":  200,  "message":  "Field deleted successfully"  }` 
+
+----------
+
+### 📅 3. Booking API
+
+#### 📌 Get All Bookings
+
+-   **Method:** GET
+    
+-   **Endpoint:** `/api/bookings`
+    
+-   **Headers:** Sama seperti di atas
+    
+-   **Response:**
+    
+
+`{  "status":  200,  "message":  "Bookings retrieved successfully",  "data":  [  {  "id":  1,  "user_id":  1,  "field_id":  2,  "booking_date":  "2025-11-11",  "start_time":  "09:00:00",  "end_time":  "11:00:00",  "status":  "pending",  "user":  {  "id":  1,  "name":  "John Doe",  "email":  "john@example.com"  },  "field":  {  "id":  2,  "name":  "Lapangan Futsal A",  "type":  "Futsal",  "price_per_hour":  "150000.00"  }  }  ]  }` 
+
+#### 📌 Create Booking
+
+-   **Method:** POST
+    
+-   **Endpoint:** `/api/bookings`
+    
+-   **Request Body:**
+    
+
+`{  "user_id":  2,  "field_id":  1,  "booking_date":  "2025-11-11",  "start_time":  "13:00",  "end_time":  "15:00"  }` 
+
+-   **Response:**
+    
+
+`{  "status":  201,  "message":  "Booking created successfully",  "data":  {  "id":  4,  "user_id":  2,  "field_id":  1,  "booking_date":  "2025-11-11",  "start_time":  "13:00",  "end_time":  "15:00",  "status":  "pending"  }  }` 
+
+#### 📌 Update Booking
+
+-   **Method:** PUT
+    
+-   **Endpoint:** `/api/bookings/:id`
+    
+-   **Request Body:**
+    
+
+`{  "booking_date":  "2025-11-12",  "start_time":  "10:00",  "end_time":  "12:00",  "status":  "confirmed"  }` 
+
+-   **Response:**
+    
+
+`{  "status":  200,  "message":  "Booking updated successfully",  "data":  {  "id":  4,  "booking_date":  "2025-11-12",  "start_time":  "10:00",  "end_time":  "12:00",  "status":  "confirmed"  }  }` 
+
+#### 📌 Delete Booking
+
+-   **Method:** DELETE
+    
+-   **Endpoint:** `/api/bookings/:id`
+    
+-   **Response:**
+    
+
+`{  "status":  200,  "message":  "Booking deleted successfully"  }` 
+
+----------
+
+## ⚙️ Struktur Folder
+
+`pgsql ├── controller/
 ├── middleware/
 ├── models/
 ├── repository/
 ├── services/
 ├── routes/
 ├── index.js
-└── README.md
+└── README.md` 
 
-🧩 Teknologi
-Node.js + Express.js
-Sequelize ORM
-JWT Authentication
-MySQL / PostgreSQL
-Body-parser & CORS
+----------
 
-👨‍💻 Pengembang
-Dibuat oleh Rizal Fauzan
+## 🧩 Teknologi
+
+-   Node.js + Express.js
+    
+-   Sequelize ORM
+    
+-   JWT Authentication
+    
+-   MySQL / PostgreSQL
+    
+-   Body-parser & CORS
+    
+
+----------
+
+## 👨‍💻 Pengembang
+
+Dibuat oleh **Rizal Fauzan**
